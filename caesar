@@ -1,0 +1,79 @@
+#include <stdio.h>
+#include <cs50.h>
+#include <string.h>
+#include <ctype.h>
+#include <stdlib.h>
+
+/*Check that program was run with one command-line argument
+* Ensure all characters are digits
+* Command line argument should be a string
+* Prompt user for input as plaintext
+* Ensure the inputted text is plaintext
+* If uppercase, rotate n times, same case, print new character
+* If lowercase, rotate n times, same case, print new character
+* If neither, print out same character
+* Print a newline
+*/
+
+int main(int argc, string argv[])
+{
+
+    // check no. of arguments given make sure there is only 1
+    if (argc != 2)
+    
+        //check if key is correct
+        for (int i = 0, n = strlen(argv[1]); i < n ; i++)
+            
+            if (!isdigit(argv[1][i]))
+            
+            {
+                // prompts user for ./caesar key
+                printf("Usage: ./caesar key\n");
+                return 1;
+            
+            }
+            
+    int k = atoi(argv[1]);
+            
+    // get text and print our cipher
+    string s = get_string("plaintext: ");
+    printf("ciphertext: ");
+
+    // iterate through plain text letter by letter
+    for (int i = 0, n = strlen(s) ; i < n; i++)
+    
+    {
+    
+        // checking if it is lowercase 97 = a to 112 = z and if it + 13 characters along.
+        if (s[i] >= 'a' && s[i] <= 'z')
+        
+        {
+            // print out lowercase with key
+            printf("%c", (((s[i] - 'a') + k) % 26) + 'a');
+            
+        }
+        
+        // if it it between uppercase A and C
+        else if (s[i] >= 'A' && s[i] <= 'Z')
+        
+        {
+        
+            // print out uppercase with key
+            printf("%c", (((s[i] - 'A') + k) % 26) + 'A');
+            
+        }
+
+        else
+
+        {
+            
+            printf("%c", s[i]);
+            
+        }
+        
+    }
+
+    printf("\n");
+    return 0;
+    
+}
